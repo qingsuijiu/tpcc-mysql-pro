@@ -79,6 +79,10 @@ double cur_max_rt[5];
 
 double prev_total_rt[5];
 
+double sum_95 = 0;
+double sum_99 = 0;
+int sum_statistics = 0;
+
 #define RTIME_NEWORD   5
 #define RTIME_PAYMENT  5
 #define RTIME_ORDSTAT  5
@@ -629,6 +633,8 @@ int main( int argc, char *argv[] )
   f = (float)(success[0] + late[0]) * 60.0
     / (float)((measure_time / PRINT_INTERVAL) * PRINT_INTERVAL);
   printf("                 %.3f TpmC\n",f);
+  printf("                 p95: %.3f\n",sum_95/sum_statistics);
+  printf("                 p99: %.3f\n",sum_99/sum_statistics);
   exit(0);
 
  sqlerr:
@@ -659,6 +665,11 @@ void alarm_handler(int signum)
   percentile_val = sb_percentile_calculate(&local_percentile, 95);
   percentile_val99 = sb_percentile_calculate(&local_percentile, 99);
   sb_percentile_reset(&local_percentile);
+
+  sum_95 += percentile_val;
+  sum_99 += percentile_val99;
+  sum_statistics++;
+  
 //  printf("%4d, %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f)\n",
   printf("%4d, trx: %d, 95%: %.3f, 99%: %.3f, max_rt: %.3f, %d|%.3f, %d|%.3f, %d|%.3f, %d|%.3f\n",
 	 time_count,
