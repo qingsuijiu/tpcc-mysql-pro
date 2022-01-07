@@ -247,9 +247,9 @@ int ordstat( int t_num,
 	if( mysql_stmt_bind_result(mysql_stmt, column) ) goto sqlerr;
         switch( mysql_stmt_fetch(mysql_stmt) ) {
             case 0: //SUCCESS
+			case MYSQL_NO_DATA: //NO MORE DATA
                 break;
             case 1: //ERROR
-            case MYSQL_NO_DATA: //NO MORE DATA
             default:
                 mysql_stmt_free_result(mysql_stmt);
                 goto sqlerr;
