@@ -334,7 +334,7 @@ LoadItems()
 		do {
 			pos = RandomNumber(0L, MAXITEMS);
 		} while (orig[pos]);
-		orig[pos] = 1;:
+		orig[pos] = 1;
 	}
 retry:
     if (retried) {
