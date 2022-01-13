@@ -43,6 +43,7 @@ int             option_debug = 0;	/* 1 if generating debug output    */
 int             is_local = 1;           /* "1" mean local */
 
 #define DB_STRING_MAX 51
+#define MAX_RETRY_TIME 10
 
 #include "parse_port.h"
 
@@ -319,6 +320,7 @@ LoadItems()
 	int             pos;
 	int             i;
     int             retried = 0;
+	int				retry_time = 0;
 
 	MYSQL_BIND    param[5];
 
@@ -332,11 +334,18 @@ LoadItems()
 		do {
 			pos = RandomNumber(0L, MAXITEMS);
 		} while (orig[pos]);
-		orig[pos] = 1;
+		orig[pos] = 1;:
 	}
 retry:
-    if (retried)
-        printf("Retrying ...\n");
+    if (retried) {
+		printf("Retrying ...\n");
+		retry_time++;
+		if(retry_time > 10) {
+			printf(" ...\n");
+			Error(0);
+		}
+	}
+        
     retried = 1;
 	for (i_id = 1; i_id <= MAXITEMS; i_id++) {
 
@@ -435,6 +444,7 @@ LoadWare()
 
 	int             tmp;
     int             retried = 0;
+	int 			retry_time = 0;
 
 	MYSQL_BIND    param[9];
 
@@ -443,8 +453,15 @@ LoadWare()
 	printf("Loading Warehouse \n");
     w_id = min_ware;
 retry:
-    if (retried)
-        printf("Retrying ....\n");
+    if (retried) {
+		printf("Retrying ...\n");
+		retry_time++;
+		if(retry_time > 10) {
+			printf(" ...\n");
+			Error(0);
+		}
+	}
+
     retried = 1;
 	for (; w_id <= max_ware; w_id++) {
 
@@ -845,6 +862,7 @@ Customer(d_id, w_id)
 
 	char            h_data[25];
     int             retried = 0;
+	int				retry_time = 0; 
 
 	MYSQL_BIND    param[18];
 
@@ -853,8 +871,14 @@ Customer(d_id, w_id)
 	printf("Loading Customer for DID=%ld, WID=%ld\n", d_id, w_id);
 
 retry:
-    if (retried)
-        printf("Retrying ...\n");
+    if (retried) {
+		printf("Retrying ...\n");
+		retry_time++;
+		if(retry_time > 10) {
+			printf("Retry fail ...\n");
+			Error(0);
+		}
+	}
     retried = 1;
 	for (c_id = 1; c_id <= CUST_PER_DIST; c_id++) {
 
@@ -1031,6 +1055,8 @@ Orders(d_id, w_id)
 	float           c_discount;
 	float           tmp_float;
     int             retried = 0;
+	int 			retry_time = 0;
+
 
 	MYSQL_BIND    param[10];
 
@@ -1040,8 +1066,15 @@ Orders(d_id, w_id)
 	o_d_id = d_id;
 	o_w_id = w_id;
 retry:
-    if (retried)
-        printf("Retrying ...\n");
+    if (retried) {
+		printf("Retrying ...\n");
+		retry_time++;
+		if(retry_time > 10) {
+			printf("Retry fail ...\n");
+			Error(0);
+		}
+	}
+
     retried = 1;
 	InitPermutation();	/* initialize permutation of customer numbers */
 	for (o_id = 1; o_id <= ORD_PER_DIST; o_id++) {
