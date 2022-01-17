@@ -468,6 +468,12 @@ int main( int argc, char *argv[] )
     pthread_create( &t[t_num], NULL, (void *)thread_main, (void *)&(thd_arg[t_num]) );
   }
 
+  // 基于当前系统的当前日期/时间
+   time_t now = time(0);
+   // 把 now 转换为字符串形式
+   char* dt = ctime(&now);
+   std::cout << "local time：" << dt << std::endl;
+
 
   printf("\nRAMP-UP TIME.(%d sec.)\n",lampup_time);
   fflush(stdout);
