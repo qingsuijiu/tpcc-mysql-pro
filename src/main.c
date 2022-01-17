@@ -472,7 +472,7 @@ int main( int argc, char *argv[] )
    time_t now = time(0);
    // 把 now 转换为字符串形式
    char* dt = ctime(&now);
-   std::cout << "local time：" << dt << std::endl;
+   printf("\nLocal Start TIME:%s\n",dt);
 
 
   printf("\nRAMP-UP TIME.(%d sec.)\n",lampup_time);
