@@ -1,10 +1,10 @@
 #!/bin/bash
 
 export LD_LIBRARY_PATH=/usr/local/mysql/lib/mysql/
-mysql_host="10.224.145.174"
-mysql_user=root
-mysql_password="123456"
-mysql_port=3311
+mysql_host=$1
+mysql_user=$2
+mysql_password=$3
+mysql_port=$4
 db="tpcc100"
 scale=1000  #仓库数
 STEP=100
