@@ -32,6 +32,7 @@ do
     echo "the test for threads num: $loop start"
 
     /usr/bin/expect <<-EOF
+    set timeout 4800
     spawn ssh fanyang@10.224.153.191
     expect "*password*"
     send "123456\r"
@@ -39,6 +40,7 @@ do
     send "cd /home/fanyang/fanyang_home/tpcc-mysql-pro/ \r"
     expect "#*"
     send "sh begin_test.sh ${loop}\r"
+    expect "*test done*"
     send "exit\r"
     expect eof
     EOF
