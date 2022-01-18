@@ -10,7 +10,7 @@ load_time=6000
 for loop in 1 4 8 16 32 64 128 256 512 1024
 do
     echo "drop and create database begin"
-    mysql -h${mysql_host} -P${mysql_port} -u${mysql_user} -p${mysql_password} < ndb_tpcc.sql
+    mysql -h${mysql_host} -P${mysql_port} -u${mysql_user} -p${mysql_password} < create_db.sql
     echo "drop and create database end"
     rm -r *.out
     
