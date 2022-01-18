@@ -21,3 +21,5 @@ do
          ./tpcc_load -h ${mysql_host} -P ${mysql_port} -d ${db} -u ${mysql_user} -p ${mysql_password} -w ${scale} -l 4 -m $x -n $(( $x + $STEP - 1 ))  >> 4_$x.out &
           x=$(( $x + $STEP ))
 done
+
+echo "load_data_multi done"

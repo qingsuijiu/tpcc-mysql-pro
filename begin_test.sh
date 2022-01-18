@@ -13,3 +13,5 @@ threads=$1 #线程数
 report_name="tpcc_report_$1threads_${running_time}time.txt"
 
 ./tpcc_start -h ${mysql_host} -P ${mysql_port} -d ${db} -u ${mysql_user} -p ${mysql_password} -w ${scale} -c ${threads} -r ${warm_time} -l ${running_time} -i ${log_interval_time} >> ${report_name}
+
+echo "test done"

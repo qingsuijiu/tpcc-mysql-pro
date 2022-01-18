@@ -9,3 +9,5 @@ db="tpcc100"
 scale=100  #仓库数
 
 ./tpcc_load -h ${mysql_host} -P ${mysql_port} -d ${db} -u ${mysql_user} -p ${mysql_password} -w ${scale}                                                                                              
+
+echo "load_data_single done"
