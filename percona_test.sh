@@ -38,12 +38,12 @@ do
     send "123456\r"
     expect "#*"
     send "cd /home/fanyang/fanyang_home/tpcc-mysql-pro/ \r"
-    expect "#*"
+    expect "*$*"
     send "sh begin_test.sh ${loop}\r"
     expect "*test done*"
     send "exit\r"
     expect eof
-    EOF
+EOF
 
     echo "the test for threads num: $loop end"
     sleep 10
