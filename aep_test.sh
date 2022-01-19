@@ -21,12 +21,14 @@ do
     send "123456\r"
     expect "#*"
 	send "cd /home/fanyang/fanyang_home/aep_db_rw \r"
+    send "sh close_mysqld.sh"
     send "export LD_LIBRARY_PATH=./lib \r"
 	send "nohup ./mysqld --defaults-file=benchmark_aep_32t.cnf & \r"
 	send "exit\r"
 	expect eof
 EOF
     echo "mysqld restart success"
+    sleep 120
     
     echo "load data begin"
     sh load_data_multi_t_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_port}
