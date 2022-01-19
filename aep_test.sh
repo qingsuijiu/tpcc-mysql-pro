@@ -28,7 +28,7 @@ do
 	expect eof
 EOF
     echo "mysqld restart success"
-    sleep 120
+    sleep 200
     
     echo "load data begin"
     sh load_data_multi_t_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_port}

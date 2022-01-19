@@ -19,7 +19,7 @@ do
     sleep ${min_load_time}
 
     success_cnt=0
-    until [ ${success_cnt} -eq 3]
+    until [ ${success_cnt} -eq 3 ]
     do
         sleep 60
         rm -r res
@@ -39,7 +39,7 @@ do
     expect "#*"
     send "cd /home/fanyang/fanyang_home/tpcc-mysql-pro/ \r"
     expect "*$*"
-    send "sh begin_test.sh ${loop}\r"
+    send "nohup sh begin_test.sh ${loop} & \r"
     expect "*test done*"
     send "exit\r"
     expect eof
