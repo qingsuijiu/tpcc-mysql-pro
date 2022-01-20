@@ -15,7 +15,7 @@ do
     echo "drop and create database end"
     
     echo "load data begin"
-    sh load_data_multi_t_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_host}
+    sh load_data_multi_t_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_port}
     sleep ${min_load_time}
 
     success_cnt=0
@@ -39,7 +39,7 @@ do
     expect "#*"
     send "cd /home/fanyang/fanyang_home/tpcc-mysql-pro/ \r"
     expect "*$*"
-    send "nohup sh begin_test_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_host} ${loop} & \r"
+    send "nohup sh begin_test_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_port} ${loop} & \r"
     expect "*test done*"
     send "exit\r"
     expect eof
