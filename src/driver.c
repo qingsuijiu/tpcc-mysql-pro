@@ -46,6 +46,7 @@ extern int rt_limit[];
 
 extern long clk_tck;
 extern sb_percentile_t local_percentile;
+extern sb_percentile_t total_percentile;
 
 #define MAX_RETRY 2000
 
@@ -148,6 +149,7 @@ static int do_neword (int t_num)
 	  max_rt[0]=rt;
 	total_rt[0] += rt;
 	sb_percentile_update(&local_percentile, rt);
+  sb_percentile_update(&total_percentile, rt);
 	hist_inc(0, rt);
 	if(counting_on){
 	  if( rt < rt_limit[0]){
