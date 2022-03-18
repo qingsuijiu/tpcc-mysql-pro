@@ -690,9 +690,9 @@ void alarm_handler(int signum)
   // sum_statistics++;
   
 //  printf("%4d, %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f), %d:%.3f|%.3f(%.3f)\n",
-  printf("%4d, trx: %d, 95%: %.3f, 99%: %.3f, max_rt: %.3f, %d|%.3f, %d|%.3f, %d|%.3f, %d|%.3f\n",
+  printf("%4d, trx: %d, 95%: %.3f, 99%: %.3f, 99.9%: %.3f, max_rt: %.3f, %d|%.3f, %d|%.3f, %d|%.3f, %d|%.3f\n",
 	 time_count,
-	 ( s[0] + l[0] - prev_s[0] - prev_l[0] ), percentile_val,percentile_val99,
+	 ( s[0] + l[0] - prev_s[0] - prev_l[0] ), percentile_val, percentile_val99, percentile_val999,
 	 (double)cur_max_rt[0],
 	 ( s[1] + l[1] - prev_s[1] - prev_l[1] ),
 	 (double)cur_max_rt[1],
