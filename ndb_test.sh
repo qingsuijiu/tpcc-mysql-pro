@@ -16,7 +16,14 @@ do
     
     echo "load data begin"
     sh load_data_multi_t_2.sh ${mysql_host} ${mysql_user} ${mysql_password} ${mysql_port}
-    sleep ${load_time}
+    load_process_num=-1
+    while [ ${load_process_num} -ne 1 ] 
+    do
+        sleep 60 
+        ps -ef | grep tpcc_load > tpcc_load_num
+        load_process_num=$(awk 'END {print NR}' tpcc_load_num)
+        echo "tpcc_load_process_num : ${load_process_num}"
+    done
     echo "load data end"
     
     echo "the test for threads num: $loop start"
